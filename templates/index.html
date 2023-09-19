@@ -12,31 +12,34 @@
             <div class="col-4 mx-auto">
                 <h3 class="text-center">Flask calculator</h3>
                 
-                {% for message in get_flashed_messages() %}
-                    <p>{{message}}</p>
-                {% endfor %}
-
-                <div class="row mb-2">
-                    <label for="num1" class="col-4">Number 1: </label>
-                    <div class="col-8"><input type="text" name="num1" id="num1" class="form-control"></div>
-                </div>
+                {% if error_msg != '' %}
+                    <p class="alert alert-danger">{{ error_msg}}</p>
+                {% endif %}
                 
                 <div class="row mb-2">
-                    <label for="num2" class="col-4">Number 2: </label>
-                    <div class="col-8"><input type="text" name="num2" id="num2" class="form-control"></div>
+                    <label for="num1" class="col-4">Number 1: </label>
+                    <div class="col-8"><input type="text" name="num1" id="num1" class="form-control" value="{{num1}}"></div>
                 </div>
+                
                 
                 <div class="row mb-2">
                     <label for="operation" class="col-4">Operation: </label>
-                    <div class="col-8">                        
-                        <select name="operation" id="operation">
+                    <div class="col-8 form-group">                        
+                        <select name="operation" id="operation" class="form-control">
                             <option value="">--</option>
-                            {% for i in range(math_operations | length) %}
-                            <option value="{{math_operations[i]}}">{{math_operations[i]}}</option>
+                            {% for i in range(maths_operations | length) %}
+                            <option value="{{maths_operations[i]}}" {% if maths_operations[i] == operation %}selected{% endif %}>{{maths_operations[i]}}</option>
                             {% endfor %}
                         </select>
                     </div>
                 </div>
+                
+                <div class="row mb-2">
+                    <label for="num2" class="col-4">Number 2: </label>
+                    <div class="col-8"><input type="text" name="num2" id="num2" class="form-control" value="{{num2}}"></div>
+                </div>
+                
+                
                 
                 <div class="row justify-content-end mb-2">
                     <div class="form-group col-8">
@@ -46,7 +49,7 @@
                 
                 <div class="row mb-2">
                     <label for="result" class="col-4">Result: </label>
-                    <div class="col-8"><input type="text" name="result" id="result" class="form-control"></div>
+                    <div class="col-8"><input type="text" name="result" id="result" class="form-control" value="{{result}}"></div>
                 </div>
             </div>
         </div>
