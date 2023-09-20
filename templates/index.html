@@ -4,6 +4,7 @@
 
     <title>Simple Flask calculator</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </head>
 <body>
     
@@ -16,9 +17,11 @@
                     <p class="alert alert-danger">{{message}}</p>
                 {% endfor %}
                 
+                <input type="hidden" id="pi" value="{{pi}}"/>
                 <div class="row mb-2">
                     <label for="num1" class="col-4">Number 1: </label>
-                    <div class="col-8"><input type="text" name="num1" id="num1" class="form-control" value="{{num1}}"></div>
+                    <div class="col-6"><input type="text" name="num1" id="num1" class="form-control" value="{{num1}}"></div>
+                    <div class="col-2"><span>Is PI</span> <input type="checkbox" name="pinum1" class="pi_checkbox" {% if pinum1 %}checked{% endif %}/></div>
                 </div>
                 
                 
@@ -36,7 +39,8 @@
                 
                 <div class="row mb-2">
                     <label for="num2" class="col-4">Number 2: </label>
-                    <div class="col-8"><input type="text" name="num2" id="num2" class="form-control" value="{{num2}}"></div>
+                    <div class="col-6"><input type="text" name="num2" id="num2" class="form-control" value="{{num2}}"></div>
+                    <div class="col-2"><span>Is PI</span> <input type="checkbox" name="pinum2" class="pi_checkbox" {% if pinum2 %}checked{% endif %}/></div>
                 </div>
                 
                 
@@ -60,7 +64,21 @@
             </div>
         </div>
     </form>
-        
+    <script>
+        $(function(){
+            $('.pi_checkbox').click(function(){
+
+                let inputid = $(this).attr('name').replace('pi', '');
+                
+                let pi_value = $('#pi').val();
+                if($(this).is(':checked')){
+                    $('#'+inputid).val(pi_value);
+                }else{
+                    $('#'+inputid).val('');
+                }
+             });
+        });
+    </script>
 
 </body>
 </html>
